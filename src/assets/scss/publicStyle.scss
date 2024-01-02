@@ -1,0 +1,61 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body,
+html {
+  // background: #040c1c;
+  font-family: Poppins, sans-serif;
+  // color: white;
+
+  color-scheme: light dark;
+}
+// body::-webkit-scrollbar {
+//   width: 0.5em;
+//   background-color: #040c1c;
+// }
+
+// /* 隐藏滚动条滑块 */
+// body::-webkit-scrollbar-thumb {
+//   background-color: #091731;
+// }
+// 滚动条类
+.scroll-line-style {
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 0.5em;
+    // background-color: #040c1c;
+  }
+
+  /* 隐藏滚动条滑块 */
+  &::-webkit-scrollbar-thumb {
+    background-color: #091731;
+  }
+}
+
+#app {
+  // overflow: hidden;
+  // background: #f1f1f1;
+}
+div {
+  box-sizing: border-box;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: initial;
+}

@@ -1,0 +1,44 @@
+.theme-dark {
+  --font-color1: #fff;
+  --font-color2: #a5acac;
+
+  --background-color1: #181818;
+  --background-color2: #242424;
+
+  --hover-background-color1: #313535;
+  --hover-background-color2: rgba(255, 255, 255, 0.08);
+  --hover-background-color3: #3b3b3b;
+
+  --border-color1: #313535;
+
+  // 输入框
+  --border-active-color: #5d5cde;
+  --placeholder-color: #464e4e;
+
+  // 消息框
+  // 用户
+  --messagebox-user-background-color: #5d5cde;
+  --messagebox-user-font-color: #fff;
+
+  // 回答
+  --messagebox-answer-background-color: #242424;
+  --messagebox-answer-font-color: #fff;
+
+  // 滚动条滑块颜色
+  --scrollbar-thumb-color: #313535;
+
+  // 单选框
+  --radio__after-color: #5d5cde; //暂时没设置两种颜色
+
+  // setting按钮
+  --setting-button-color: #e3567c;
+  --setting-info-link-color: #9494fa;
+
+  // 选中当前地址
+  --selected-address-color: #2727b6;
+  --selected-address-color--hover: #3b3abe;
+
+  // 删除按钮
+  --delete-button-color: #e3567c;
+  --delete-button-box-shadow-color: rgba(255, 255, 255, 0.03);
+}
