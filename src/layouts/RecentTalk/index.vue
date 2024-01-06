@@ -3,7 +3,7 @@
     <div class="content">
       <div class="top">
         <router-link to="/">
-          <img :src="themeStore.themeLogo" alt="ai chat logo" width="220" height="66" />
+          <base-image :src="themeStore.themeLogo" alt="ai chat logo" width="220" height="100%" />
         </router-link>
       </div>
       <div class="history white-scroll">
@@ -276,7 +276,7 @@ function operate(id: string, event: any) {
   display: flex;
   padding: 8px 16px;
 
-  :deep .van-skeleton-avatar {
+  :deep(.van-skeleton-avatar ) {
     display: flex;
     justify-content: center;
     align-items: center;
