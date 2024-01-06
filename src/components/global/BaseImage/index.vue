@@ -7,15 +7,15 @@
     :alt="alt"
     :width="width"
     :height="height"
+    ref="image"
   >
     <template v-slot:loading>
-      <div class="imageLoading"><van-icon name="photo-o" /></div>
+      <div class="imageLoading"><van-icon  name="photo-o" /></div>
     </template>
   </van-image>
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps, withDefaults, defineOptions } from "vue";
 import type Props from "./index.d";
 defineOptions({
   name: "BaseImage",
@@ -25,9 +25,18 @@ const props = withDefaults(defineProps<Props>(), {
   fit: "fill",
   position: "center",
 });
+
+const image = ref()
+const imageHegiht = ref('')
+onMounted(()=>{
+  imageHegiht.value = image.value.$el.offsetHeight + 'px'
+})
 const iconFontSize = computed(() => {
   if (Number(props.height)) {
     return props.height + "px";
+  }
+  if(String(props.height).endsWith('%')){     
+   return imageHegiht.value
   }
   return props.height;
 });
