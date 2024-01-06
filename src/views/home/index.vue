@@ -8,14 +8,7 @@
     <div class="Content white-scroll">
       <div class="Content__body">
         <div class="icon">
-          <base-image
-            fit="cover"
-            position="center"
-            :src="themeStore.themeLogo"
-            alt="ai chat logo"
-            width="220"
-            height="66"
-          ></base-image>
+          <base-image fit="cover" position="center" :src="themeStore.themeLogo" alt="ai chat logo" width="220" height="66"></base-image>
           <van-button text="aa" type="primary" @click="testa"></van-button>
         </div>
         <!-- <RobotSelect :robots="robots" v-model:id="roleId"></RobotSelect> -->
@@ -28,10 +21,7 @@
             @blur="inputFocus = false"
             @keydown.enter="sendAnswer"
           />
-          <div
-            :class="['sendButton', { active: inputValue }]"
-            @click="sendAnswer"
-          >
+          <div :class="['sendButton', { active: inputValue }]" @click="sendAnswer">
             <van-icon name="down" />
           </div>
         </div>
@@ -68,8 +58,8 @@ onMounted(() => {
   input.focus();
 });
 
-function testa(){
-  showDialog({title:'aaa'})
+function testa() {
+  showDialog({ title: "aaa" });
 }
 </script>
 

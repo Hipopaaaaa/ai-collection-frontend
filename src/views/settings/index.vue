@@ -24,7 +24,13 @@
         <div class="theme settingBox">
           <div class="theme__title">Appearance</div>
           <div class="radioList">
-            <div class="radioBox" v-for="item in themeList" :key="item.id" @click="checkRadio(item)" :class="{ active: selectedTheme === item.value }">
+            <div
+              class="radioBox"
+              v-for="item in themeList"
+              :key="item.id"
+              @click="checkRadio(item)"
+              :class="{ active: selectedTheme === item.value }"
+            >
               <div class="radioBox__selector"></div>
               <div class="radioBox__label">{{ item.name }}</div>
             </div>
@@ -32,9 +38,9 @@
         </div>
 
         <div class="info settingBox">
-          <nuxt-link to="/faq" class="info__link">FAQ</nuxt-link>
-          <nuxt-link to="/privacy-policy" class="info__link">Privacy policy</nuxt-link>
-          <nuxt-link to="/contacts" class="info__link">Contact us</nuxt-link>
+          <router-link to="/faq" class="info__link">FAQ</router-link>
+          <router-link to="/privacy-policy" class="info__link">Privacy policy</router-link>
+          <router-link to="/contacts" class="info__link">Contact us</router-link>
         </div>
         <!-- 退出登录按钮 -->
         <div class="logout settingButton" @click="Logout">Logout</div>
@@ -46,16 +52,16 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 // import { useLogin } from '@/stores/login.js'
 import { usethemeStore } from '@/stores/themeStore'
 const themeStore = usethemeStore()
 
 // const store = useLogin()
 // const route = useRoute()
-
 // 主题列表
-const themeList = ref([
+type themeItemType = { name: string; value: string; id: number }
+const themeList = ref<themeItemType[]>([
   {
     name: 'Light theme',
     value: 'light',
@@ -71,10 +77,10 @@ const themeList = ref([
 const selectedTheme = ref('light')
 // 提取存储在浏览器本地的主题
 onMounted(() => {
-  selectedTheme.value = JSON.parse(localStorage.getItem('theme')) || 'light'
+  selectedTheme.value = JSON.parse(localStorage.getItem('theme') as string) || 'light'
 })
 // 单选框点击事件
-function checkRadio(item) {
+function checkRadio(item: themeItemType) {
   selectedTheme.value = item.value
 
   themeStore.switchTheme(item.value)
@@ -83,11 +89,9 @@ function checkRadio(item) {
 // 退出登录
 function Logout() {
   const router = useRouter()
-  store.logout()
+  // store.logout()
   router.push('/')
 }
-
-
 </script>
 
 <style lang="scss" scoped>
