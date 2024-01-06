@@ -1,5 +1,15 @@
 # vue3-talker
 
+## node版本
+
+使用nvm 用以下的版本：
+
+>    18.16.1
+>
+>   * 16.17.0
+
+
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
