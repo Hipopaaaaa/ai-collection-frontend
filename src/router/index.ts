@@ -29,54 +29,6 @@ Object.keys(asyncModule).forEach((path: string) => {
   autoImportRoutes.push(route);
   routes[0]?.children?.push(route);
 });
-console.log(autoImportRoutes);
-const lastRoutes: any[] = [];
-const layerRoutes: any[] = [];
-// 组装路由，根据上下级组装
-function stratifyRoutes(route: any) {
-  // 根据 '/' 数量分割，别放入对应的数组
-  const index = route.path.split("/").length - 2;
-  if (layerRoutes[index]) {
-    layerRoutes[index].push({ ...route });
-  } else {
-    layerRoutes[index] = [];
-    layerRoutes[index].push({ ...route });
-  }
-}
-// 组装路由
-
-autoImportRoutes.map((route) => {
-  stratifyRoutes(route);
-});
-function getChildrenRoutes(path, index) {
-  console.log(path, index);
-
-  if (layerRoutes[index]) {
-    const children = [];
-    layerRoutes[index].map((item) => {
-      if (item.path.includes(path)) {
-        children.push(item);
-      }
-    });
-    return children;
-  }
-  return [];
-}
-layerRoutes.map((array, index) => {
-  const a = array.map((route, index) => {
-    route.children = getChildrenRoutes(route.path, index + 1);
-  });
-  console.log(a, "a");
-});
-// console.log(layerRoutes);
-
-// 调用函数进行路由组装
-// 假设 layerRoutes 已经填充好了数据
-
-// const assembledRoutes = buildHierarchy(layerRoutes);
-// console.log(assembledRoutes);
-
-// routes[0].children = layerRoutes[0];
 
 const router = createRouter({
   history: createWebHashHistory(),
