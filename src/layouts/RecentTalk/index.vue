@@ -3,7 +3,7 @@
     <div class="content">
       <div class="top">
         <router-link to="/">
-          <base-image :src="themeStore.themeLogo" alt="ai chat logo" width="220" height="100%" />
+          <base-image :src="themeStore.themeLogo" alt="ai chat logo" width="auto" height="100%" />
         </router-link>
       </div>
       <div class="history white-scroll">
@@ -89,11 +89,7 @@
           </div>
         </router-link> -->
         <!-- 超出最大展示聊天数则隐藏 -->
-        <div
-          class="operate section"
-          :class="[{ selected: $route.path === '/chats' }]"
-          v-if="historyStore.historyList.length > 4"
-        >
+        <div class="operate section" :class="[{ selected: $route.path === '/chats' }]" v-if="historyStore.historyList.length > 4">
           <router-link to="/chats">
             <van-icon name="ellipsis" />
             <span>See All History</span>
@@ -131,134 +127,134 @@
 </template>
 
 <script lang="ts" setup>
-import { getCurrentInstance, ref, onMounted } from 'vue'
-import { showConfirmDialog } from 'vant'
-import { useLayout } from '@/stores/layoutSetting'
-import { usethemeStore } from '@/stores/themeStore'
-import { useChatStore } from '@/stores/chat'
-const themeStore = usethemeStore()
+import { getCurrentInstance, ref, onMounted } from "vue";
+import { showConfirmDialog } from "vant";
+import { useLayout } from "@/stores/layoutSetting";
+import { usethemeStore } from "@/stores/themeStore";
+import { useChatStore } from "@/stores/chat";
+const themeStore = usethemeStore();
 
-const layout = useLayout()
+const layout = useLayout();
 
 // 隐藏侧边栏
 function closeSider() {
-  layout.add()
+  layout.add();
 }
 
 // 监听屏幕宽度
-const screenWidth = ref(0)
+const screenWidth = ref(0);
 onMounted(() => {
   // 创建查询列表
   // 为后续设置查询条件做准备
   let mql = [
     // window.matchMedia('(max-width: 1030px)'),
-    window.matchMedia('(max-width: 1000px)')
-  ]
+    window.matchMedia("(max-width: 1000px)")
+  ];
 
   // 定义回调函数
   function mediaMatchs() {
-    screenWidth.value = window.innerWidth
+    screenWidth.value = window.innerWidth;
     if (mql[0].matches) {
       // 屏幕宽度小于1000px
-      closeSider()
+      closeSider();
     } else {
       // 屏幕宽度大于1000px
-      layout.remove()
+      layout.remove();
     }
   }
 
   // 先运行一次回调函数
-  mediaMatchs()
+  mediaMatchs();
   // 为查询列表注册监听器，同时将回调函数传给监听器
   for (var i = 0; i < mql.length; i++) {
-    mql[i].addEventListener('change', mediaMatchs)
+    mql[i].addEventListener("change", mediaMatchs);
   }
-})
+});
 
 // 会话历史
-const historyStore = useChatStore()
+const historyStore = useChatStore();
 
 onMounted(async () => {
-  await historyStore.getHistory()
-})
+  await historyStore.getHistory();
+});
 
-const hash = ref()
+const hash = ref();
 onMounted(() => {
   // console.log(getCurrentInstance());
   // @ts-ignore
-  hash.value = getCurrentInstance()?.type.__scopeId
-})
+  hash.value = getCurrentInstance()?.type.__scopeId;
+});
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function operate(id: string, event: any) {
-  event.stopPropagation()
-  event.preventDefault()
+  event.stopPropagation();
+  event.preventDefault();
 
   // console.log(event.currentTarget)
   // console.log('operate: ', id)
-  const deleteBtn = document.createElement('div')
-  deleteBtn.classList.add('delete')
+  const deleteBtn = document.createElement("div");
+  deleteBtn.classList.add("delete");
   deleteBtn.innerHTML = `<i class="iconfont icon-lajitong"></i><span style="margin-left:5px;">Delete Chat</span>
-  `
+  `;
   // const hash = getCurrentInstance().proxy.$options._scopeId
   // console.log(hash)
 
   // 获取绑定点击事件的父元素
-  const parent = event.currentTarget.parentNode
+  const parent = event.currentTarget.parentNode;
   // 设置hash属性
-  deleteBtn.setAttribute(hash.value, '')
+  deleteBtn.setAttribute(hash.value, "");
   // 自动聚焦
-  deleteBtn.setAttribute('tabindex', '0')
+  deleteBtn.setAttribute("tabindex", "0");
 
-  parent.appendChild(deleteBtn)
+  parent.appendChild(deleteBtn);
 
-  deleteBtn.focus()
+  deleteBtn.focus();
 
   const clickHandler = (event: any) => {
-    event.stopPropagation()
-    event.preventDefault()
+    event.stopPropagation();
+    event.preventDefault();
 
     showConfirmDialog({
-      title: 'Operation confirmation',
-      message: 'Are you sure you want to delete this chat?',
-      confirmButtonText: 'Confirm',
-      cancelButtonText: 'Cancel',
-      confirmButtonColor: '#ad1840'
+      title: "Operation confirmation",
+      message: "Are you sure you want to delete this chat?",
+      confirmButtonText: "Confirm",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#ad1840"
     })
       .then(() => {
         // 用户点击了 "确定"
         // 执行操作
-        console.log('delete :', id)
+        console.log("delete :", id);
         // 删除会话
         // 删除dom 判断是否存在dom 如果不存在则不删除
         if (deleteBtn) {
-          deleteBtn.removeEventListener('click', clickHandler)
-          deleteBtn.removeEventListener('blur', blurHandler)
+          deleteBtn.removeEventListener("click", clickHandler);
+          deleteBtn.removeEventListener("blur", blurHandler);
 
-          deleteBtn.remove()
+          deleteBtn.remove();
         }
       })
       .catch(() => {
         // on cancel
-      })
-  }
+      });
+  };
 
   const blurHandler = (event: any) => {
-    event.stopPropagation()
-    event.preventDefault()
-    console.log('blur :', id)
+    event.stopPropagation();
+    event.preventDefault();
+    console.log("blur :", id);
     // 删除dom 判断是否存在dom 如果不存在则不删除
     if (deleteBtn) {
-      deleteBtn.removeEventListener('click', clickHandler)
-      deleteBtn.removeEventListener('blur', blurHandler)
-      deleteBtn.remove()
+      deleteBtn.removeEventListener("click", clickHandler);
+      deleteBtn.removeEventListener("blur", blurHandler);
+      deleteBtn.remove();
     }
-  }
+  };
 
   // 监听失去焦点事件
-  deleteBtn.addEventListener('blur', blurHandler)
+  deleteBtn.addEventListener("blur", blurHandler);
   // 监听点击事件
-  deleteBtn.addEventListener('click', clickHandler)
+  deleteBtn.addEventListener("click", clickHandler);
 }
 </script>
 
@@ -276,7 +272,7 @@ function operate(id: string, event: any) {
   display: flex;
   padding: 8px 16px;
 
-  :deep(.van-skeleton-avatar ) {
+  :deep(.van-skeleton-avatar) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -346,7 +342,7 @@ function operate(id: string, event: any) {
     height: $chat-header-height;
     background-color: var(--background-color2);
     border-bottom: 1px solid var(--border-color1);
-
+    text-align: center;
     a {
       display: inline-block;
       height: 100%;
@@ -385,7 +381,7 @@ function operate(id: string, event: any) {
           padding: 8px;
           display: flex;
           flex-direction: column;
-          font-family: 'Microsoft YaHei UI', Arial, Helvetica, sans-serif;
+          font-family: "Microsoft YaHei UI", Arial, Helvetica, sans-serif;
 
           .robotIcon {
             height: 28px;
@@ -412,7 +408,7 @@ function operate(id: string, event: any) {
           padding: 8px;
           display: flex;
           flex-direction: column;
-          font-family: 'Microsoft YaHei UI', Arial, Helvetica, sans-serif;
+          font-family: "Microsoft YaHei UI", Arial, Helvetica, sans-serif;
 
           .robotIcon {
             height: 28px;
@@ -513,7 +509,7 @@ function operate(id: string, event: any) {
             max-width: 100%;
             text-overflow: ellipsis;
             white-space: nowrap;
-            font-family: 'Microsoft YaHei UI', Arial, Helvetica, sans-serif;
+            font-family: "Microsoft YaHei UI", Arial, Helvetica, sans-serif;
           }
 
           .lastAnswer {
@@ -605,7 +601,7 @@ function operate(id: string, event: any) {
           height: 38px;
           display: flex;
           align-items: center;
-          font-family: 'Microsoft YaHei UI', Arial, Helvetica, sans-serif;
+          font-family: "Microsoft YaHei UI", Arial, Helvetica, sans-serif;
         }
       }
 
@@ -627,7 +623,7 @@ function operate(id: string, event: any) {
           height: 38px;
           display: flex;
           align-items: center;
-          font-family: 'Microsoft YaHei UI', Arial, Helvetica, sans-serif;
+          font-family: "Microsoft YaHei UI", Arial, Helvetica, sans-serif;
         }
       }
     }

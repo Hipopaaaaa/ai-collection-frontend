@@ -8,8 +8,7 @@
     <div class="Content white-scroll">
       <div class="Content__body">
         <div class="icon">
-          <base-image fit="cover" position="center" :src="themeStore.themeLogo" alt="ai chat logo" width="220" height="66"></base-image>
-          <van-button text="aa" type="primary" @click="testa"></van-button>
+          <base-image fit="cover" position="center" :src="themeStore.themeLogo" alt="ai chat logo" width="220" height="auto"></base-image>
         </div>
         <!-- <RobotSelect :robots="robots" v-model:id="roleId"></RobotSelect> -->
         <div :class="['inputBox', { active: inputFocus }]">
@@ -33,7 +32,6 @@
 <script lang="ts" setup>
 import { useChatStore } from "@/stores/chat";
 import { usethemeStore } from "@/stores/themeStore";
-import { showDialog } from "vant";
 // import { robots } from "@/utils/robots";
 const inputFocus = ref(false);
 const inputValue = ref("");
@@ -57,29 +55,9 @@ onMounted(() => {
   const input = document.querySelector("input") as HTMLInputElement;
   input.focus();
 });
-
-function testa() {
-  showDialog({ title: "aaa" });
-}
 </script>
 
 <style lang="scss" scoped>
-.imageLoading {
-  @keyframes van-skeleton-blink {
-    50% {
-      opacity: 0.6;
-    }
-  }
-  width: 100%;
-  height: 100%;
-  animation: van-skeleton-blink 1.2s ease-in-out infinite;
-  // background-color: var(--delete-button-box-shadow-color);
-  display: flex;
-  justify-content: center;
-  i {
-    font-size: 66px;
-  }
-}
 // 控制页面大于1000px时隐藏头部组件
 @media screen and (min-width: 1000px) {
   .chatHeader {
@@ -113,7 +91,8 @@ h1 {
       // align-items: center;
       .icon {
         margin-top: 100px;
-        padding: 36px 0;
+        // padding: 36px 0;
+        text-align: center;
         :deep(.van-image__loading) {
           background: inherit;
         }
