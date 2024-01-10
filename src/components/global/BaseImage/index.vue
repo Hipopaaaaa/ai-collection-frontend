@@ -10,33 +10,33 @@
     ref="image"
   >
     <template v-slot:loading>
-      <div class="imageLoading"><van-icon  name="photo-o" /></div>
+      <div class="imageLoading"><van-icon name="photo-o" /></div>
     </template>
   </van-image>
 </template>
 
 <script lang="ts" setup>
-import type Props from "./index.d";
+import type { BaseImageProps } from "./index";
 defineOptions({
-  name: "BaseImage",
+  name: "BaseImage"
 });
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<BaseImageProps>(), {
   fit: "fill",
-  position: "center",
+  position: "center"
 });
 
-const image = ref()
-const imageHegiht = ref('')
-onMounted(()=>{
-  imageHegiht.value = image.value.$el.offsetHeight + 'px'
-})
+const image = ref();
+const imageHegiht = ref("");
+onMounted(() => {
+  imageHegiht.value = image.value.$el.offsetHeight + "px";
+});
 const iconFontSize = computed(() => {
   if (Number(props.height)) {
     return props.height + "px";
   }
-  if(String(props.height).endsWith('%')){     
-   return imageHegiht.value
+  if (String(props.height).endsWith("%")) {
+    return imageHegiht.value;
   }
   return props.height;
 });

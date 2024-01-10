@@ -1,6 +1,6 @@
 import { ImageFit } from "vant";
 
-export interface Props {
+export interface BaseImageProps {
   src: string;
   width?: string | number;
   height?: string | number;
@@ -8,5 +8,3 @@ export interface Props {
   fit?: ImageFit;
   position?: string;
 }
-
-export default Props;
