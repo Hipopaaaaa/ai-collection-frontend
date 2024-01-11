@@ -8,9 +8,16 @@
     <div class="Content white-scroll">
       <div class="Content__body">
         <div class="icon">
-          <base-image fit="cover" position="center" :src="themeStore.themeLogo" alt="ai chat logo" width="220" height="auto"></base-image>
+          <base-image
+            fit="cover"
+            position="center"
+            :src="themeStore.themeLogo"
+            alt="ai chat logo"
+            width="220"
+            height="auto"
+          ></base-image>
         </div>
-        <!-- <RobotSelect :robots="robots" v-model:id="roleId"></RobotSelect> -->
+        <RobotSelect :robots="robots" v-model:id="roleId"></RobotSelect>
         <div :class="['inputBox', { active: inputFocus }]">
           <input
             type="text"
@@ -32,12 +39,12 @@
 <script lang="ts" setup>
 import { useChatStore } from "@/stores/chat";
 import { usethemeStore } from "@/stores/themeStore";
-// import { robots } from "@/utils/robots";
+import { robots } from "@/utils/robots";
 const inputFocus = ref(false);
 const inputValue = ref("");
 const chatStore = useChatStore();
 const router = useRouter();
-const roleId = ref("assistant");
+const roleId = ref<string>("assistant");
 
 const themeStore = usethemeStore();
 
