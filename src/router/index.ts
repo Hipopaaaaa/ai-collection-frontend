@@ -9,14 +9,16 @@ const routes: Array<RouteRecordRaw> = [
     children: []
   }
 ];
-const asyncModule = import.meta.glob("@/views/**/index.vue");
+const asyncModule = import.meta.glob("@/views/**/*.vue");
 const autoImportRoutes: {}[] = [];
 //遍历模块,生成路由
 Object.keys(asyncModule).forEach((path: string) => {
   if (path.includes("/components")) return;
   // console.log(path);
+  // 去掉 [] 符号
+  const replaceBracket = path.replace(/\[(.*?)\]/g, (match, param) => `:${param}`);
   // 去掉'/views'前缀
-  const routePath = path.replace("/src/views", "").replace("/index.vue", "");
+  const routePath = replaceBracket.replace("/src/views", "").replace("/index", "").replace(".vue", "");
   // const regex = /\/([^/]+)\/index\.vue$/;
   // const reg = regex.exec(path) as RegExpExecArray;
   // const routePath = reg[1];
