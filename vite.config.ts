@@ -5,7 +5,6 @@ import { VantResolver } from "unplugin-vue-components/resolvers";
 
 import vue from "@vitejs/plugin-vue";
 import { ConfigEnv, loadEnv, UserConfig } from "vite";
-import path from "path";
 const CWD = process.cwd();
 
 // https://vitejs.dev/config/
@@ -40,7 +39,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     resolve: {
       alias: {
         "@": fileURLToPath(new URL("./src", import.meta.url)),
-        "@page": path.resolve(__dirname, "src/", VITE_VIEWS_URL)
+        "@page":fileURLToPath(new URL(`./src/${VITE_VIEWS_URL}`, import.meta.url)) 
       }
     }
   };
