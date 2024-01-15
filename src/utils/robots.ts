@@ -1,6 +1,6 @@
 import robot from "@/assets/image/robot.webp";
 import GPT4 from "@/assets/image/GPT4.0.webp";
-export const robots = [
+export const robots: robotInfo[] = [
   {
     roleId: "assistant",
     robotName: "Assistant",
@@ -20,7 +20,15 @@ export const robots = [
 ];
 
 // 根据roleId获取机器人信息
-export const getRobotInfo = (roleId: string) => {
+export const getRobotInfo = (roleId: string): robotInfo => {
   // 找不到默认assistant
-  return robots.find((robot) => robot.roleId === roleId) ? robots.find((robot) => robot.roleId === roleId) : robots[0];
+  return robots.find((robot) => robot.roleId === roleId) ? robots.find((robot) => robot.roleId === roleId) as robotInfo : robots[0];
 };
+
+export interface robotInfo {
+  roleId: string;
+  robotName: string;
+  avatar: string;
+  operated: string;
+  introduction: string;
+}
