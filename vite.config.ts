@@ -33,7 +33,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       }),
       Components({
         dts: "./src/components.d.ts",
-        dirs: ["./src/components"],
+        dirs: [`./src/${VITE_VIEWS_COMPONENTS_URL}`],
         resolvers: [VantResolver()]
       })
     ],
