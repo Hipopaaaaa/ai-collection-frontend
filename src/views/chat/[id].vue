@@ -150,10 +150,10 @@
           </div>
         </div>
         <div class="robotDesc__content__operate">
-          <nuxt-link :to="`/robots/${robotInfo?.roleId}`" class="newChat_button">
+          <router-link :to="`/robots/${robotInfo?.roleId}`" class="newChat_button">
             <van-icon name="plus" />
             <span>New chat</span>
-          </nuxt-link>
+          </router-link>
           <!-- <div>后续扩展按钮</div> -->
         </div>
         <div :class="['robotDesc__content__info', { show: showInfo }]" id="introduction">
@@ -173,7 +173,7 @@
         </div>
         <!--  -->
         <div class="primary-operate-btn">
-          <nuxt-link to="/chats?bot=Assistant">See all chats with this bot</nuxt-link>
+          <router-link to="/chats?bot=Assistant">See all chats with this bot</router-link>
         </div>
       </div>
       <!-- 介绍骨架 -->
