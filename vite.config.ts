@@ -9,7 +9,7 @@ const CWD = process.cwd();
 
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv): UserConfig => {
-  const { VITE_VIEWS_URL, VITE_VIEWS_COMPONENTS_URL } = loadEnv(mode, CWD);
+  const { VITE_VIEWS_URL, VITE_GLOBAL_COMPONENTS_URL } = loadEnv(mode, CWD);
   return {
     css: {
       preprocessorOptions: {
@@ -32,7 +32,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       }),
       Components({
         dts: "./src/components.d.ts",
-        dirs: [`./src/${VITE_VIEWS_COMPONENTS_URL}`],
+        dirs: [`./src/${VITE_GLOBAL_COMPONENTS_URL}`],
         resolvers: [VantResolver()]
       })
     ],
